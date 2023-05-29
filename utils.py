@@ -1,0 +1,1 @@
+CSS_URL = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
