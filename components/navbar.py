@@ -7,7 +7,7 @@ Navbar = dbc.NavbarSimple(
     children=[
         dbc.NavItem(dbc.NavLink("Machine Learning", href="/machinelearning")),
         dbc.NavItem(dbc.NavLink("Deep Learning", href="/deeplearning")),
-        dbc.NavItem(dbc.NavLink("Reinforcement Learning", href="/deeplearning")),
+        dbc.NavItem(dbc.NavLink("Reinforcement Learning", href="/reinforcementlearning")),
         dbc.DropdownMenu(
             children=[
                 dbc.DropdownMenuItem("More Pages", header=True),
