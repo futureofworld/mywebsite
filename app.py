@@ -2,6 +2,7 @@ from dash import Dash, html, page_container
 import dash_bootstrap_components as dbc
 
 from components.navbar import Navbar
+from components.footer import Footer
 from utils import CSS_URL
 
 dbc_css = CSS_URL
@@ -12,7 +13,7 @@ app = Dash(
             "content": "width=device-width, intial-scale=1"},]
 )
 
-app.layout = html.Div([Navbar])
+app.layout = html.Div([Navbar, Footer])
 
 if __name__ == "__main__":
     app.run_server(host="0.0.0.0", port='8080', debug=True)
