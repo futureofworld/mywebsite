@@ -1,5 +1,7 @@
-from dash import html
+from dash import html, register_page
 import dash_bootstrap_components as dbc
+
+register_page(__name__, path='/')
 
 ml = dbc.Row([
     dbc.Col(),  # add machine learning image
@@ -27,4 +29,5 @@ rl = dbc.Row([
             className='dbc'),
     ])
 ])
-main = dbc.Container([ml, dl, rl])
+
+layout = dbc.Container([ml, dl, rl])
