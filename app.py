@@ -9,7 +9,7 @@ from utils import CSS_URL
 dbc_css = CSS_URL
 
 app = Dash(
-    external_stylesheets=[dbc.themes.DARKLY, dbc_css, dbc.icons.BOOTSTRAP],
+    external_stylesheets=[dbc.themes.DARKLY, dbc_css, dbc.icons.BOOTSTRAP, dbc.icons.FONT_AWESOME],
     meta_tags=[{"name":"viewport", 
             "content": "width=device-width, intial-scale=1"}],
     use_pages=True,
