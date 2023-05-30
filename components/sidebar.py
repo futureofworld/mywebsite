@@ -14,74 +14,39 @@ documentation: https://dash.plot.ly/urls
 """
 import dash
 import dash_bootstrap_components as dbc
-from dash import Input, Output, dcc, html, callback
+from dash import Input, Output, dcc, html, callback, State
 
-PLOTLY_LOGO = "https://images.plot.ly/logo/new-branding/plotly-logomark.png"
-
-sidebar = html.Div(
-    [
-        html.Div(
-            [
-                # width: 3rem ensures the logo is the exact width of the
-                # collapsed sidebar (accounting for padding)
-                html.Img(src=PLOTLY_LOGO, style={"width": "3rem"}),
-                html.H2("Sidebar"),
-            ],
-            className="sidebar-header",
-        ),
-        html.Hr(),
-        dbc.Nav(
-            [
-                dbc.NavLink(
-                    [html.I(className="fas fa-home me-2"), html.Span("Home")],
-                    href="/home",
-                    active="exact",
+def sidebar(button_id="open-offcanvas", canvas_id="offcanvas"):
+    drawer = html.Div(
+        [
+            html.Div(
+                dbc.Button(
+                    "", id=button_id, n_clicks=0, 
+                    className='bi bi-three-dots-vertical position-fixed mt-1'
+                ), 
+                style={'paddingLeft': '4px'}
+            ),
+            dbc.Offcanvas(
+                html.P(
+                    "This is the content of the Offcanvas. "
+                    "Close it by clicking on the close button, or "
+                    "the backdrop."
                 ),
-                dbc.NavLink(
-                    [
-                        html.I(className="fas fa-calendar-alt me-2"),
-                        html.Span("Calendar"),
-                    ],
-                    href="/calendar",
-                    active="exact",
-                ),
-                dbc.NavLink(
-                    [
-                        html.I(className="fas fa-envelope-open-text me-2"),
-                        html.Span("Messages"),
-                    ],
-                    href="/messages",
-                    active="exact",
-                ),
-            ],
-            vertical=True,
-            pills=True,
-            className='dbc'
-        ),
-    ],
-    className="sidebar dbc",
-)
+                id=canvas_id,
+                title="Title",
+                is_open=False,
+            ),
+        ]
+    )
 
-content = html.Div(id="page-content", className="content")
+    @callback(
+        Output(canvas_id, "is_open"),
+        Input(button_id, "n_clicks"),
+        [State(canvas_id, "is_open")],
+    )
+    def toggle_offcanvas(n1, is_open):
+        if n1:
+            return not is_open
+        return is_open
 
-layout = sidebar
-
-
-# set the content according to the current pathname
-# callback(Output("page-content", "children"), Input("url", "pathname"))
-# def render_page_content(pathname):
-#     if pathname == "/home":
-#         return html.P("This is the home page!")
-#     elif pathname == "/calendar":
-#         return html.P("This is your calendar... not much in the diary...")
-#     elif pathname == "/messages":
-#         return html.P("Here are all your messages")
-#     # If the user tries to reach a different page, return a 404 message
-#     return html.Div(
-#         [
-#             html.H1("404: Not found", className="text-danger"),
-#             html.Hr(),
-#             html.P(f"The pathname {pathname} was not recognised..."),
-#         ],
-#         className="p-3 bg-light rounded-3",
-#     )
+    return drawer
